@@ -1,30 +1,63 @@
-const productService = require("../services/productService");
+const productService = require('../services/productService');
 
-const getAllProducts = async (req, res) => {
-  try {
-    const products = await productService.getAllProducts();
+/**
+ * Clase que representa el controlador de productos
+ */
+class ProductController {
+  /**
+   * Controlador para obtener todos los productos
+   * @param {Object} req - Request de Express
+   * @param {Object} res - Response de Express
+   */
+  async getProducts(req, res) {
+    const products = await productService.getProducts();
     res.json(products);
-  } catch (err) {
-    console.error("Error al obtener productos:", err.message);
-    res.status(500).json({ error: "Error interno del servidor" });
   }
-};
 
-const getProductById = async (req, res) => {
-  const { product_id } = req.params;
-  try {
-    const product = await productService.getProductById(product_id);
+  /**
+   * Controlador para obtener un producto por ID
+   * @param {Object} req - Request de Express
+   * @param {Object} res - Response de Express
+   */
+  async getProductById(req, res) {
+    const product = await productService.getProductById(req.params.id);
+    if (!product) return res.status(404).json({ msg: 'Producto no encontrado' });
     res.json(product);
-  } catch (err) {
-    if (err.response && err.response.status === 404) {
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
-    console.error("Error al obtener producto:", err.message);
-    res.status(500).json({ error: "Error interno del servidor" });
   }
-};
 
-module.exports = {
-  getAllProducts,
-  getProductById,
-};
+  /**
+   * Controlador para crear un nuevo producto
+   * @param {Object} req - Request de Express
+   * @param {Object} res - Response de Express
+   */
+  async createProduct(req, res) {
+    const result = await productService.createProduct(req.body);
+    if (result.error) return res.status(400).json({ msg: result.error });
+    res.status(201).json(result);
+  }
+
+  /**
+   * Controlador para actualizar un producto existente
+   * @param {Object} req - Request de Express
+   * @param {Object} res - Response de Express
+   */
+  async updateProduct(req, res) {
+    const result = await productService.updateProduct(req.params.id, req.body);
+    if (!result) return res.status(404).json({ msg: 'Producto no encontrado' });
+    if (result.error) return res.status(400).json({ msg: result.error });
+    res.json(result);
+  }
+
+  /**
+   * Controlador para eliminar un producto por ID
+   * @param {Object} req - Request de Express
+   * @param {Object} res - Response de Express
+   */
+  async deleteProduct(req, res) {
+    const result = await productService.deleteProduct(req.params.id);
+    if (!result) return res.status(404).json({ msg: 'Producto no encontrado' });
+    res.json({ msg: 'Producto eliminado' });
+  }
+}
+
+module.exports = new ProductController();

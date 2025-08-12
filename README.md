@@ -1,22 +1,31 @@
-# API de Productos - FakeStore Wrapper
+
+# Trabajo Final - Diplomatura Professional Full Stack Developer (UTN)
+
+**Universidad Tecnológica Nacional**
+
+**Módulo NodeJs**
+
+Este repositorio corresponde al trabajo final para la diplomatura de Professional Full Stack Developer dictada por la Universidad Tecnológica Nacional (UTN), módulo NodeJs. El proyecto consiste en el desarrollo de una API RESTful propia para la gestión y consulta de productos.
+
+# API de Productos
 
 ## 📋 Descripción
 
-Esta es una API REST desarrollada en Node.js como segundo trabajo practico para la diplomatura Professional Full Stack Developer, que actúa como wrapper para la API pública de FakeStore. Permite obtener información de productos de manera sencilla y organizada, con documentación automática mediante Swagger.
+API RESTful desarrollada en Node.js y Express, con arquitectura en capas (controladores, servicios, repositorios), que permite consultar, crear, actualizar y eliminar productos. Incluye documentación interactiva con Swagger y manejo de errores robusto.
 
 ## 🚀 Características
 
-- **Arquitectura MVC**: Separación clara entre controladores, servicios y rutas
-- **Documentación automática**: Swagger UI integrado para probar endpoints
+- **Arquitectura en capas**: Separación clara entre controladores, servicios, repositorios y rutas
+- **Documentación automática**: Swagger UI integrado para probar y consultar los endpoints
 - **Manejo de errores**: Respuestas HTTP apropiadas para diferentes situaciones
-- **Variables de entorno**: Configuración flexible mediante archivos .env
+- **Variables de entorno**: Configuración flexible mediante archivos `.env`
 - **API RESTful**: Endpoints bien estructurados siguiendo convenciones REST
 
 ## 🛠️ Tecnologías Utilizadas
 
 - **Node.js**: Runtime de JavaScript
 - **Express.js**: Framework web para Node.js
-- **Axios**: Cliente HTTP para realizar peticiones a APIs externas
+// ...existing code...
 - **Swagger UI Express**: Documentación interactiva de la API
 - **YAML.js**: Parser para archivos YAML de Swagger
 - **Dotenv**: Gestión de variables de entorno
@@ -24,18 +33,27 @@ Esta es una API REST desarrollada en Node.js como segundo trabajo practico para 
 ## 📁 Estructura del Proyecto
 
 ```
-Tp2/
+TP-Final-NodeJs-UTN/
 ├── app.js                 # Punto de entrada de la aplicación
 ├── package.json           # Dependencias y scripts
-├── .gitignore            # Archivos excluidos de Git
+├── .gitignore             # Archivos excluidos de Git
+├── config/                # Configuración de la base de datos y entorno
+│   └── db.js
 ├── controllers/           # Controladores de la aplicación
 │   └── productController.js
-├── routes/               # Definición de rutas
+├── routes/                # Definición de rutas
 │   └── productRoutes.js
-├── services/             # Lógica de negocio
+├── services/              # Lógica de negocio y validaciones
 │   └── productService.js
-└── docs/                 # Documentación
-    └── swagger.yaml
+├── repositories/          # Acceso a datos y persistencia
+│   └── productRepository.js
+├── models/                # Modelos de datos
+│   └── Product.js
+├── utils/                 # Utilidades varias
+│   └── dbHealth.js
+├── docs/                  # Documentación Swagger
+│   └── swagger.yaml
+└── README.md              # Documentación del proyecto
 ```
 
 ## ⚙️ Instalación
@@ -148,7 +166,7 @@ La API incluye documentación automática con Swagger UI. Una vez que el servido
 http://localhost:3000/api-docs
 ```
 
-Aquí podrás:
+Desde allí podrás:
 - Ver todos los endpoints disponibles
 - Probar las peticiones directamente desde el navegador
 - Ver los esquemas de datos
@@ -226,7 +244,7 @@ Este proyecto está bajo la Licencia ISC. Ver el archivo `LICENSE` para más det
 
 ## 👨‍💻 Autor
 
-Desarrollado como parte del Trabajo Práctico 2 de la Diplomatura en Node.js de UTN.
+Desarrollado como trabajo final para la Diplomatura Professional Full Stack Developer (UTN), módulo NodeJs.
 
 ## 📞 Soporte
 

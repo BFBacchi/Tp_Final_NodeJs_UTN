@@ -1,8 +1,18 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const productController = require("../controllers/productController");
+const productController = require('../controllers/productController');
 
-router.get("/products", productController.getAllProducts);
-router.get("/product/:product_id", productController.getProductById);
+/**
+ * @swagger
+ * tags:
+ *   name: Productos
+ *   description: API para productos
+ */
+
+router.get('/', productController.getProducts);
+router.get('/:id', productController.getProductById);
+router.post('/', productController.createProduct);
+router.put('/:id', productController.updateProduct);
+router.delete('/:id', productController.deleteProduct);
 
 module.exports = router;
