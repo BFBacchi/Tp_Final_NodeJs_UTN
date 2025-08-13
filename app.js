@@ -26,5 +26,9 @@ app.use('/api/products', productRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Exportar como función serverless para Vercel
-const serverless = require('serverless-http');
-module.exports = serverless(app);
+//const serverless = require('serverless-http');
+//module.exports = serverless(app);
+//Dedicamos un puerto de ejecucion a nuestra aplicacion
+app.listen(8080, () => {
+    console.log('Servidor escuchandose en el puerto ' + 8080)
+})
